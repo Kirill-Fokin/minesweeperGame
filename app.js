@@ -11,42 +11,22 @@ export class App {
        this.bombs = bombs
        this.clicks = clicks
        this.closure = closure
+       this.mode = 10;
     }
 
+
+   pushresultsToLocal() {
+    setItem("res", )
+   }
+
     getResultsFromLocalStorage() {
-      let time = document.querySelectorAll('.endgame-text')[0].textContent == undefined ? 1 : document.querySelectorAll('.endgame-text')[0].textContent
-      let pos = document.querySelector('.endgame-title').textContent
-      
-
-
-      console.log('time: ' + time)
-      console.log('pos: ' + pos)
-      const lastRes =  localStorage.getItem('results')
-      let results = lastRes.split('+')
-      if (results.length > 3) {
-        results.slice(1)
-      }
-      for (let r of results) {
-      
-        const leaderboardText = createElement('p', ['leaderboardText'])
-        let board = document.querySelector('.leaderboard')
-        leaderboardText.textContent = r
-        leaderboard.append(leaderboardText)
-
-      }
     
-
-      const leaderboardsText = createElement('p', ['leaderboards-text'])
-
-
-
-
-      localStorage.setItem('results', [lastRes + '+' + time + '' + pos + '+']) 
       
+    
+   
 
 
-      console.log(localStorage.getItem('results'))
-      
+     
     }
 
     changeMode () {
@@ -54,17 +34,21 @@ export class App {
 
       const modeText = document.querySelector('.mode-text')
       if (modeText.textContent == 'EASY') {
+        this.mode = 15;
         modeText.textContent = 'MEDIUM'
          this.refresh(15, 15, 30)
          app.classList.remove('app25X25')
          app.classList.add('app15X15')
        }
        else if (modeText.textContent == 'MEDIUM') {
+        this.mode = 25;
         modeText.textContent = 'HARD'
-        this.refresh(25,25,65)
+        this.refresh(25, 25, 65)
         app.classList.add('app25X25')
+        app.classList.remove('app15X15')
        }
-       else if (modeText.textContent == 'HARD') {
+        else if (modeText.textContent == 'HARD') {
+          this.mode = 10;
         modeText.textContent = 'EASY'
         this.refresh(10,10,10)
         app.classList.remove('app25X25')
@@ -200,7 +184,22 @@ export class App {
      
       const modeText= createElement('p', ['mode-text']);
       mode.append(modeText)
-      modeText.textContent = 'EASY'
+      
+      if (this.mode == 10) {
+        modeText.textContent = 'EASY'
+      }
+        
+      else if (this.mode == 15) {
+        modeText.textContent = 'MEDIUM'
+      }
+        
+      else if (this.mode == 25) {
+        modeText.textContent = 'HARD'
+      }
+
+
+
+      
       mode.addEventListener('click', () => {
        if (modeText.textContent == 'EASY') {
         modeText.textContent = 'MEDIUM'
@@ -250,7 +249,7 @@ export class App {
                console.log('324324234')
                if (res) {
                  this.createEndGame('Lose') 
-                
+                 this.getResultsFromLocalStorage() 
              
                
               }
@@ -262,7 +261,7 @@ export class App {
           }
           
         }
-        this.getResultsFromLocalStorage() 
+        
       }
 
       isWin() {
@@ -325,8 +324,22 @@ export class App {
      }
 
      refresh(width =10, height=10, bombs=10 ) {
+      // bombs = this.mode == 10 ? 10  : this.mode == 15 ? 25;
+      document.querySelector('.flag-text').textContent ='10';
+
+
+      bombs = this.mode == 10
+      ? 10
+      :this.mode == 15
+      ? 35
+      : this.mode == 25
+
+      if ( this.mode == 25) {
+        bombs = 65;
+      }
       let boxes = document.querySelectorAll('.box')
        console.log(boxes.length)
+
 
        this.width = width;
        this.heigth = height;

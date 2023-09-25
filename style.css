@@ -61,6 +61,10 @@
   background-color: rgba(84, 82, 80, 0.207);
 }
 
+.leaderboard-title {
+  font-size: 3.5rem;
+}
+
 .endgame-button {
   position: absolute;
   right:0;
@@ -140,7 +144,7 @@
   position: relative;
   z-index: 999900;
   top: -7rem;
-  left: 20rem;
+  left: 30rem;
   display: grid;
   justify-content:flex-end;
   overflow-y: auto;

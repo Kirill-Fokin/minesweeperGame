@@ -15,14 +15,21 @@ class Box {
   }
 
  setFlage(isFlagged) {
+  if (this.isFlagged) {
+    this.isFlagged = false;
+    this.boxElem.innerHTML =  "";
+    document.querySelector('.flag-text').textContent  = +document.querySelector('.flag-text').textContent + 1
+  } else {
   this.isFlagged = isFlagged;
-  this.boxElem.innerHTML = isFlagged ? "🚩" : "";
+  
+  
 
 
-    // if (isFlagged && +(document.querySelector('.flag-text').textContent) > 0) {
-    //     this.boxElem.innerHTML = '🚩';
-    //     document.querySelector('.flag-text').textContent  = +document.querySelector('.flag-text').textContent - 1;
-    // } 
+  if (isFlagged && +(document.querySelector('.flag-text').textContent) > 0 && !this.isOpenned) {
+    this.boxElem.innerHTML = isFlagged ? "🚩" : "";
+        document.querySelector('.flag-text').textContent  = +document.querySelector('.flag-text').textContent - 1;
+    } 
+  }
  }
 
 
@@ -130,7 +137,7 @@ removeFlage() {
     
  createBoxOnArea() {
      const boxElem = document.createElement('div')
-    //  boxElem.innerHTML = this.value || ''; 
+     boxElem.innerHTML = this.value || ''; 
      boxElem.classList.add('box'); 
      boxElem.classList.add('initial'); 
      if (this.value) {

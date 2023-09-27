@@ -12,23 +12,50 @@ export class App {
        this.clicks = clicks
        this.closure = closure
        this.mode = 10;
+       this.res = []
+       this.lastRes = 0;
+       
     }
 
+    
+   getResultsfromLocal() {
+    console.log('данные получены!')
+    let results =  localStorage.getItem("leaderboard");
+    console.log(results)
+     return results 
+   } 
 
    pushresultsToLocal() {
-    setItem("res", )
+      const lastresultTime = document.querySelector('.endgame-text').textContent.slice(12)
+      const lastresultClicks = document.querySelectorAll('.endgame-text')[1].textContent.slice(14)
+      console.log(lastresultClicks)
+      let oldRes = this.getResultsfromLocal() 
+      if (oldRes) {
+        
+       
+
+        
+      }
+    
+      if (oldRes) {
+      localStorage.setItem('leaderboard',  lastresultTime+ ' ' + lastresultClicks + '-' + oldRes)
+      console.log(lastresultTime)
+
+      if (this.getResultsfromLocal().split('-').length > 10 ) {
+        localStorage.setItem('leaderbord', getResultsfromLocal().split('-').slice(0, 10).join('-'))
+        console.log( oldRes.split('-').length)
+      }
+
+      } else {
+        
+          localStorage.setItem('leaderboard',  '-'  + lastresultTime+ ' ' + lastresultClicks )
+          console.log(lastresultTime)
+          console.log('rgdfsgdfsgdf')
+          
+      }
+// 
    }
-
-    getResultsFromLocalStorage() {
-    
-      
-    
-   
-
-
-     
-    }
-
+  
     changeMode () {
       const app = document.getElementById('app')
 
@@ -83,6 +110,17 @@ export class App {
 
      const modal = document.querySelector('.modal');
      modal.append(leaderbord)
+
+     let res = this.getResultsfromLocal().split('-')
+     for (let i = 0; i < 10; i++) {
+      const stroka = createElement('div', ['leaderboard-text']) 
+      if (res[i]== '') {
+        continue
+      }
+      stroka.textContent = i  + 1 + ' ' + res[i]
+
+      leaderbord.append(stroka)
+     }
     }
     
 
@@ -249,7 +287,7 @@ export class App {
                console.log('324324234')
                if (res) {
                  this.createEndGame('Lose') 
-                 this.getResultsFromLocalStorage() 
+                 
              
                
               }
@@ -279,6 +317,8 @@ export class App {
         }
         if (counter == winNumeber) {
           this.createEndGame('Win')
+          this.pushresultsToLocal()
+          this.stopwatch.stop()
         }
         console.log(counter)
       }
@@ -288,7 +328,7 @@ export class App {
       return 
     }
     const   modal = createElement('div', ['modal'])
-    document.body.prepend(modal)
+    document.body .prepend(modal)
     setTimeout(() => modal.classList.add('open') , 200);
       const endGameField = createElement('div', ['endgame'])
       modal.append(endGameField)
@@ -308,7 +348,7 @@ export class App {
       const  endGameText = createElement('div', ['endgame-text'])
       const  endGameTime = createElement('div', ['endgame-text'])
        
-      endGameText.textContent = 'Youre result: ---'
+      endGameText.textContent = `Youre result: ${document.querySelector('.click-counter').textContent}`
       endGameField.append(endGameTime)
       let time = document.querySelector('.timer').textContent
       endGameTime.textContent = `Youre time: ${time}`

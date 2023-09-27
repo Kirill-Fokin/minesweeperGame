@@ -65,6 +65,10 @@
   font-size: 3.5rem;
 }
 
+.leaderboard-text {
+  font-size: 35px;
+  text-decoration: underline;
+}
 .endgame-button {
   position: absolute;
   right:0;

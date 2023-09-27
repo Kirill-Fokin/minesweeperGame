@@ -14,3 +14,8 @@ app.addListeners()
 // stopwatch.start()
 app.isWin()
 app.createStopwatch()
+
+console.log(matrix)
+// localStorage.setItem("res", 1) 
+app.getResultsfromLocal()
+console.log(app)

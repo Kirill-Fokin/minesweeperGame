@@ -11,7 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(247, 244, 244);
+  background-color: rgb(26, 25, 25);
+  color: white;
 }
 
 .leaderboards-button {
@@ -21,12 +22,15 @@
   border-radius: 2rem;
   width: 6rem;
   height: 5rem;
-  background-color: rgb(217, 214, 214);
+  background-color: rgb(26, 25, 25);
+  color: white;
 }
 
 .leaderboards {  
+  background-color: rgb(26, 25, 25);
+  color: white;
   width:4rem;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(217, 214, 214);
 }
 
 .style-text {
@@ -41,7 +45,7 @@
   width: 100%;
   height: 100vh;
   z-index: 99998;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(86, 82, 82, 0.4);
   display: grid;
   align-items: center;
   justify-content: center;
@@ -58,9 +62,19 @@
   flex-direction: column;
   width: 40rem;
   height: 50rem;
-  background-color: rgba(84, 82, 80, 0.207);
+  background-color: rgb(26, 25, 25);
+  color: white;
+  border-radius: 2rem;
 }
 
+.leaderboard-title {
+  font-size: 3.5rem;
+}
+
+.leaderboard-text {
+  font-size: 35px;
+  text-decoration: underline;
+}
 .endgame-button {
   position: absolute;
   right:0;
@@ -72,23 +86,25 @@
   align-items: center;
   width: 4rem;
   height: 4rem;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid black;
   border-radius: 50%;
   font-size: 4rem;
+  background-color: rgb(26, 25, 25);
+  color: white;
 }
 
 .endgame-title {
   text-align: center;
   margin-top: 2rem;
   font-size: 5rem;
-  color:rgb(41, 39, 39);
+  color:whitesmoke;
 }
 
 .endgame-text  {
  justify-self: center;
  align-self: center;
  font-size: 2rem;
- color: rgb(245, 242, 242);
+ color: white;
 }
 
 .modal.open {
@@ -98,11 +114,11 @@
 
 .flag-text {
   font-size: 4rem;
-  color: rgb(255, 255, 255);
+  color: black;
 }
 
 .body {
-  background-color: rgb(188, 188, 188);
+  background-color: rgb(29, 29, 29);
 }
 
 .sound-image {
@@ -117,19 +133,24 @@
   font-weight: 400;
   width: 6rem;
   height: 5rem;
+  background-color: rgb(26, 25, 25);
+  color: white;
 }
 
 .mode{
+  background-color: rgb(26, 25, 25);
+  color: white;
   font-size: 1.5rem;
   font-weight: 400;
 }
 
 .sound {
+  background-color: rgb(70, 66, 66);
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;;
-  background-color: rgb(217, 214, 214);
   width: 6.5rem;
   height: 5rem; 
 }
@@ -140,7 +161,7 @@
   position: relative;
   z-index: 999900;
   top: -7rem;
-  left: 20rem;
+  left: 30rem;
   display: grid;
   justify-content:flex-end;
   overflow-y: auto;
@@ -165,7 +186,7 @@
  }
 
 .refresh {
-  background-color: rgb(47, 45, 45);
+  background-color: rgb(217, 214, 214);
   border: 6px solid darkgray;
   border-style: outset;
   width: 5rem;
@@ -179,6 +200,7 @@
 }
 
 .menu {
+  /* background-color: black; */
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -207,7 +229,7 @@
 }
 
 .burger {
-  background-color: rgb(49, 49, 49);
+  background-color: rgb(217, 214, 214);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -217,7 +239,7 @@
 }
 
 .click-counter {
-  background-color: rgb(47, 46, 46);
+  background-color: rgb(217, 214, 214);
   border: 6px solid darkgray;
   border-style: outset;
   font-size: 3rem;
@@ -267,13 +289,11 @@
   justify-content:space-between;
 }
 
-
 .flag-img {
   display: flex;
   width: 3rem;
   height: 4rem;
   margin-left: 0.5rem;
-
 }
 
 .container {
@@ -289,25 +309,50 @@
   flex-wrap: wrap;
 }
 
+.app15X15 {
+  margin: 0 auto;
+  max-width: 750px !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.leaderboard {
+  top: 20rem;
+  left: 12rem;
+  position: absolute;
+  width: 30rem;
+  height: 60rem;
+
+}
+
+.app25X25 {
+  margin: 0 auto;
+  max-width: 1250px !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .box {
+  background-color: rgb(26, 25, 25);
+  color: white;
   width: 50px;
   height: 50px;
-  background-color: lightgray;
-  border: 1px solid darkgray;
+  
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .initial {
-  background-color: rgb(206, 202, 202);
-  border: 5px solid grey;
+  background-color: rgb(45, 44, 44);
+  color: white;
+
   border-style: outset;
   cursor: pointer;
 }
 
 .bomb-count-1 {
-  color: blue;
+  color: rgb(255, 0, 0);
 }
 
 .bomb-count-2 {

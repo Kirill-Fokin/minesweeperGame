@@ -190,7 +190,7 @@ export class App {
       const modeText= createElement('p', ['mode-text']);
       mode.append(modeText)
       
-      modeText.textContent = this.mode == 10 ? 'EASY' : this.mode == 15 ? 25 : this.mode == 25  ? 65 : 100;
+      modeText.textContent = this.mode == 10 ? 'EASY' : this.mode == 15 ? 'MEDIUM' : this.mode == 25  ? 'HARD' : 100;
       
       mode.addEventListener('click', () => {
        if (modeText.textContent == 'EASY') {

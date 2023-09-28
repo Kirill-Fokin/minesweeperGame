@@ -2,7 +2,7 @@ import { createMatrix, matrix} from "./matrix.js"
 import { createElement } from "./helpers.js";
 import { Menu } from "./menu.js";
 import { Stopwatch } from "./timer.js"
-import { cellSound, bombSound  } from "./audio.js"
+import { cellSound, bombSound, winSound  } from "./audio.js"
 
 export class App {
   constructor (width=15, height=15, bombs, clicks, closure) {
@@ -10,13 +10,8 @@ export class App {
        this.heigth = height
        this.bombs = bombs
        this.clicks = clicks
-       this.closure = closure
        this.mode = 10;
-       this.res = []
-       this.lastRes = 0;
-       
     }
-
     
    getResultsfromLocal() {
     console.log('данные получены!')
@@ -30,30 +25,19 @@ export class App {
       const lastresultClicks = document.querySelectorAll('.endgame-text')[1].textContent.slice(14)
       console.log(lastresultClicks)
       let oldRes = this.getResultsfromLocal() 
-      if (oldRes) {
-        
-       
-
-        
-      }
-    
+      
       if (oldRes) {
       localStorage.setItem('leaderboard',  lastresultTime+ ' ' + lastresultClicks + '-' + oldRes)
       console.log(lastresultTime)
-
       if (this.getResultsfromLocal().split('-').length > 10 ) {
         localStorage.setItem('leaderbord', getResultsfromLocal().split('-').slice(0, 10).join('-'))
         console.log( oldRes.split('-').length)
       }
-
       } else {
-        
           localStorage.setItem('leaderboard',  '-'  + lastresultTime+ ' ' + lastresultClicks )
           console.log(lastresultTime)
-          console.log('rgdfsgdfsgdf')
-          
+          console.log('rgdfsgdfsgdf')   
       }
-// 
    }
   
     changeMode () {
@@ -85,7 +69,7 @@ export class App {
 
     startGame(width, height, bombs) {
       createMatrix(width, height, bombs)
-      console.log(matrix)
+      // console.log(matrix)
     }
 
     changeTheme () {
@@ -101,7 +85,6 @@ export class App {
       }
     }
 
-
     createLeaderboarsd() {
      const leaderbord = createElement('div', ['leaderboard']) 
      const leaderbordTitle = createElement('div', ['leaderboard-title']) 
@@ -110,29 +93,25 @@ export class App {
 
      const modal = document.querySelector('.modal');
      modal.append(leaderbord)
-
+     
      let res = this.getResultsfromLocal().split('-')
      for (let i = 0; i < 10; i++) {
+      let res1 =  'Time: '+  res[i].split(' ')[0] + ', ' + res[i].split(' ')[1] + ' clicks' 
+      
       const stroka = createElement('div', ['leaderboard-text']) 
-      if (res[i]== '') {
+      if (res[i]== '' ||  res[i]== undefined) {
         continue
       }
-      stroka.textContent = i  + 1 + ' ' + res[i]
-
+      stroka.textContent =  ' ' + res1 
       leaderbord.append(stroka)
      }
     }
-    
-
-   
-
 
     addListeners() {
       document.querySelector('.refresh').addEventListener('click', () => this.refresh( this.width, this.heigth, this.bombs))
       document.querySelector('.refresh').addEventListener('click',
        () => { document.querySelector('.refresh-img').classList.add('refresh-img-rotated'),
        setTimeout(()=>document.querySelector('.refresh-img').classList.remove('refresh-img-rotated'), 1000 )
-       
       })  
       document.getElementById('app').addEventListener('click', 
       () => this.isLose(),)
@@ -141,7 +120,7 @@ export class App {
       document.getElementById('app').addEventListener('click', 
       () => this.isFirstClick()) 
       document.querySelector('.burger-img').addEventListener('click', 
-     () => this.createSetting() )     
+      () => this.createSetting() )     
     }
 
     lastClickCoordinates ()  {
@@ -185,7 +164,6 @@ export class App {
         this.sound = true;
         cellSound.volume = 1;
         bombSound.volume = 1;
-      
      }
     })
      
@@ -205,7 +183,6 @@ export class App {
       })
 
       const style= createElement('div', ['style-button']);
-
       style.addEventListener('click', () => {
         this.changeTheme ()
       })
@@ -213,9 +190,6 @@ export class App {
       styleText.textContent = 'Style'
       settings.append(style)
       style.append(styleText)
-
-
-
 
       const mode = createElement('div', ['mode']);
       settings.append(mode)
@@ -234,9 +208,6 @@ export class App {
       else if (this.mode == 25) {
         modeText.textContent = 'HARD'
       }
-
-
-
       
       mode.addEventListener('click', () => {
        if (modeText.textContent == 'EASY') {
@@ -255,8 +226,6 @@ export class App {
 
       modal.append(settings)
       console.log('settings created')
-
-
       modal.addEventListener('click', (e)=> {
         if (e.target.classList.contains('modal')){
           modal.classList.remove('open')
@@ -286,27 +255,21 @@ export class App {
                console.log('Ты проиграл ')
                console.log('324324234')
                if (res) {
-                 this.createEndGame('Lose') 
-                 
-             
-               
+                this.stopwatch.stop()
+                this.createEndGame('Lose') 
               }
               if (!res) {
                 return true
               }
-             
              }
           }
-          
         }
-        
       }
 
       isWin() {
         let counter = 0;
         const winNumeber =  document.querySelectorAll('.box').length == 100 ? 90 :
          document.querySelectorAll('.box').length == 225 ? 195 : 560
-     
 
         for (let i = 0; i < matrix.length; i++) {
           for (let j = 0; j < matrix[0].length; j++) {
@@ -319,6 +282,7 @@ export class App {
           this.createEndGame('Win')
           this.pushresultsToLocal()
           this.stopwatch.stop()
+          winSound.play()
         }
         console.log(counter)
       }
@@ -354,7 +318,6 @@ export class App {
       endGameTime.textContent = `Youre time: ${time}`
       endGameField.append(endGameText)
       // stopwatch.stop()
-       
      }
 
      safeData () {
@@ -366,7 +329,6 @@ export class App {
      refresh(width =10, height=10, bombs=10 ) {
       // bombs = this.mode == 10 ? 10  : this.mode == 15 ? 25;
       document.querySelector('.flag-text').textContent ='10';
-
 
       bombs = this.mode == 10
       ? 10
@@ -386,7 +348,6 @@ export class App {
        this.width = width;
        for (let i = 0; i < boxes.length; i++) {
         boxes[i].remove()
-     
      }
      this.stopwatch.reset()
      this.stopwatch.start()
@@ -398,12 +359,9 @@ export class App {
     let menu = new Menu()
     menu.create()
    } 
-   
-   
    createStopwatch() {
     this.stopwatch = new Stopwatch("stopwatch");
-     this.stopwatch.start()
-      
+    this.stopwatch.start()   
 }
 }
 

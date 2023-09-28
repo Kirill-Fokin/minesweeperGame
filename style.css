@@ -275,13 +275,11 @@
   justify-content:space-between;
 }
 
-
 .flag-img {
   display: flex;
   width: 3rem;
   height: 4rem;
   margin-left: 0.5rem;
-
 }
 
 .container {
@@ -297,30 +295,25 @@
   flex-wrap: wrap;
 }
 
-
 .app15X15 {
   margin: 0 auto;
   max-width: 750px !important;
-  /* max-height:650px !important; */
   display: flex;
   flex-wrap: wrap;
 }
 
 .leaderboard {
   top: 20rem;
-  left: 5rem;
+  left: 12rem;
   position: absolute;
   width: 30rem;
   height: 60rem;
-  border: 3px solid black;
-
 
 }
 
 .app25X25 {
   margin: 0 auto;
   max-width: 1250px !important;
-  /* max-height:800px !important; */
   display: flex;
   flex-wrap: wrap;
 }

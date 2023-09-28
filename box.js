@@ -2,8 +2,6 @@ import { getAllNeighbors, openAllBoxes  } from "./matrix.js";
 import { createElement } from "./helpers.js";
 import { cellSound, bombSound  } from "./audio.js"
 
-
-
 const appElem = document.getElementById("app");
 
 class Box {
@@ -14,16 +12,13 @@ class Box {
     this.isClicked  = false;
   }
 
- setFlage(isFlagged) {
-  if (this.isFlagged) {
+  setFlage(isFlagged) {
+   if (this.isFlagged) {
     this.isFlagged = false;
     this.boxElem.innerHTML =  "";
     document.querySelector('.flag-text').textContent  = +document.querySelector('.flag-text').textContent + 1
   } else {
-  this.isFlagged = isFlagged;
-  
-  
-
+    this.isFlagged = isFlagged;
 
   if (isFlagged && +(document.querySelector('.flag-text').textContent) > 0 && !this.isOpenned) {
     this.boxElem.innerHTML = isFlagged ? "🚩" : "";
@@ -32,30 +27,16 @@ class Box {
   }
  }
 
-
-removeFlage() {
-  if(this.isFlagged) {
-    this.isFlagged = false;
-    this.boxElem.innerHTML = ' ';
-
+  removeFlage() {
+    if(this.isFlagged) {
+      this.isFlagged = false;
+      this.boxElem.innerHTML = ' ';
+    }
   }
-}
-
- 
-
- 
-
-
 
   setBoxValue(value) {
     this.value = value;
   }
-
-
-//   setBoxCliked() {
-//     this.cliked = true;
-//     document.querySelector('.click-counter').textContent = +document.querySelector('.click-counter').textContent + 1
-//   }
 
   showBoxValue(){
     this.boxElem.innerHTML = this.value || "";
@@ -65,13 +46,10 @@ removeFlage() {
      return this.value;
   }
 
-  
-
   open() {
     this.isOpenned = true;
     this.boxElem.classList.remove('initial'); 
     this.showBoxValue()
-   
   }
 
   setBoxType() {
@@ -79,6 +57,7 @@ removeFlage() {
        this.setBoxValue('💣');
        return;
     }
+
     const AllNeighbors = getAllNeighbors(this.coordinates)
     let bombCount = 0;
 
@@ -88,20 +67,19 @@ removeFlage() {
         }
     });
 
-  if (bombCount) {
-    this.setBoxValue(bombCount)
-  }
+    if (bombCount) {
+      this.setBoxValue(bombCount)
+    }
   }
 
   onBoxClick(allowOpenNumber = false, isReturn = true) {
- 
     this.isClicked = true;
-
     cellSound.play()
     if (this.isFlagged) {
       console.log('this block  is flagged !')
      return 
     }
+
     if (!this.value && !this.isOpenned){
       this.open();
       const allNeighbors = getAllNeighbors(this.coordinates);
@@ -109,13 +87,12 @@ removeFlage() {
         if (!neighbor.isOpenned) {
           neighbor.onBoxClick(true, false);
         }
-        
       });
      
       if (isReturn) {
         document.querySelector('.click-counter').textContent = +document.querySelector('.click-counter').textContent  + 1;
       }
-      
+
       } else if (
         (this.value && allowOpenNumber  ) || typeof this.value === "number")  {
         this.open();
@@ -151,13 +128,10 @@ removeFlage() {
         return
       }
      );
-    
-     
      
      appElem.appendChild(boxElem);
   }
 }
-
 export function createBox(isBomb, coordinates) {
     const newBox = new Box(isBomb, coordinates);
 

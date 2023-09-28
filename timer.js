@@ -7,29 +7,27 @@ export class Stopwatch {
   }
   
   formatTime(ms) {
-    var hours   = Math.floor(ms / 3600000);
-    var minutes = Math.floor((ms - (hours * 3600000)) / 60000);
-    var seconds = Math.floor((ms - (hours * 3600000) - (minutes * 60000)) / 1000);
-    var ds = Math.floor((ms - (hours * 3600000) - (minutes * 60000) - (seconds * 1000))/100);
-
+    let hours   = Math.floor(ms / 3600000);
+    let minutes = Math.floor((ms - (hours * 3600000)) / 60000);
+    let seconds = Math.floor((ms - (hours * 3600000) - (minutes * 60000)) / 1000);
+    let ds = Math.floor((ms - (hours * 3600000) - (minutes * 60000) - (seconds * 1000))/100);
 
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
     return minutes+':'+seconds+'';
   }
 
-
   stop() {
     if (this.state=="running") {
-   this.state="paused";
+    this.state="paused";
  if (this.interval) {
    clearInterval(this.interval);
    this.interval = null;
  }
-    }
+  }
 }
   
-    update() {
+  update() {
     if (this.state=="running") {
       this.value += this.delay;
     }
@@ -54,7 +52,7 @@ export class Stopwatch {
       clearInterval(this.interval);
       this.interval = null;
     }
-       }
+      }
   }
   
   reset() {
@@ -62,7 +60,6 @@ export class Stopwatch {
     this.value=0;
     this.update();
   }
-  
 }
 
 

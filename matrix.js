@@ -3,9 +3,6 @@ import { createBox } from "./box.js";
 
 export let matrix = [];
 
-
-
-
 function addBombs(bombCount) {
     let currentBombCount = bombCount;
 
@@ -36,8 +33,6 @@ function addBombs(bombCount) {
    const n_6 = matrix[y + 1]?.[x - 1];
    const n_7 = matrix[y]?.[x - 1];
    const n_8 = matrix[y - 1]?.[x - 1];
- 
-
 
    return [n_1, n_2, n_3, n_4, n_5, n_6, n_7, n_8].filter(
     (item) => typeof item !== "undefined"
@@ -58,9 +53,6 @@ function addBombs(bombCount) {
         } )
         )
 }
-
-
-
 
 export function openAllBoxes() {
     matrix.forEach((matrixLine) => {

@@ -1,9 +1,9 @@
-import { createMatrix, matrix} from "./matrix.js"
-import { createElement } from "./helpers.js";
-import { Menu } from "./menu.js";
-import { Stopwatch } from "./timer.js"
-import { cellSound, bombSound  } from "./audio.js"
-import {App} from "./app.js"
+import { createMatrix, matrix} from "./data/matrix.js"
+import { createElement } from "./data/helpers.js";
+import { Menu } from "./data/menu.js";
+import { Stopwatch } from "./data/timer.js"
+import { cellSound, bombSound  } from "./data/audio.js"
+import {App} from "./data/app.js"
 
 let app = new App(10, 10, 10, 0,)
 app.startGame(app.width, app.height, app.bombs)

@@ -14,29 +14,23 @@ export class App {
     }
     
    getResultsfromLocal() {
-    console.log('данные получены!')
     let results =  localStorage.getItem("leaderboard");
-    console.log(results)
      return results 
    } 
 
    pushresultsToLocal() {
       const lastresultTime = document.querySelector('.endgame-text').textContent.slice(12)
       const lastresultClicks = document.querySelectorAll('.endgame-text')[1].textContent.slice(14)
-      console.log(lastresultClicks)
       let oldRes = this.getResultsfromLocal() 
       
       if (oldRes) {
       localStorage.setItem('leaderboard',  lastresultTime+ ' ' + lastresultClicks + '-' + oldRes)
-      console.log(lastresultTime)
-      if (this.getResultsfromLocal().split('-').length > 10 ) {
-        localStorage.setItem('leaderbord', getResultsfromLocal().split('-').slice(0, 10).join('-'))
-        console.log( oldRes.split('-').length)
-      }
+        if (this.getResultsfromLocal().split('-').length > 10 ) {
+          localStorage.setItem('leaderbord', getResultsfromLocal().split('-').slice(0, 10).join('-'))
+        }
+
       } else {
-          localStorage.setItem('leaderboard',  '-'  + lastresultTime+ ' ' + lastresultClicks )
-          console.log(lastresultTime)
-          console.log('rgdfsgdfsgdf')   
+          localStorage.setItem('leaderboard',  '-'  + lastresultTime+ ' ' + lastresultClicks ) 
       }
    }
   
@@ -51,15 +45,15 @@ export class App {
          app.classList.remove('app25X25')
          app.classList.add('app15X15')
        }
-       else if (modeText.textContent == 'MEDIUM') {
+      else if (modeText.textContent == 'MEDIUM') {
         this.mode = 25;
         modeText.textContent = 'HARD'
         this.refresh(25, 25, 65)
         app.classList.add('app25X25')
         app.classList.remove('app15X15')
        }
-        else if (modeText.textContent == 'HARD') {
-          this.mode = 10;
+      else if (modeText.textContent == 'HARD') {
+        this.mode = 10;
         modeText.textContent = 'EASY'
         this.refresh(10,10,10)
         app.classList.remove('app25X25')
@@ -69,7 +63,7 @@ export class App {
 
     startGame(width, height, bombs) {
       createMatrix(width, height, bombs)
-      // console.log(matrix)
+
     }
 
     changeTheme () {
@@ -95,15 +89,15 @@ export class App {
      modal.append(leaderbord)
      
      let res = this.getResultsfromLocal().split('-')
-     for (let i = 0; i < 10; i++) {
-      let res1 =  'Time: '+  res[i].split(' ')[0] + ', ' + res[i].split(' ')[1] + ' clicks' 
-      
-      const stroka = createElement('div', ['leaderboard-text']) 
-      if (res[i]== '' ||  res[i]== undefined) {
-        continue
-      }
-      stroka.textContent =  ' ' + res1 
-      leaderbord.append(stroka)
+
+      for (let i = 0; i < 10; i++) {
+        let res1 =  'Time: '+  res[i].split(' ')[0] + ', ' + res[i].split(' ')[1] + ' clicks' 
+        const stroka = createElement('div', ['leaderboard-text']) 
+        if (res[i]== '' ||  res[i]== undefined) {
+          continue;
+        }
+        stroka.textContent =  ' ' + res1 
+        leaderbord.append(stroka)
      }
     }
 
@@ -130,7 +124,6 @@ export class App {
             this.lastClickCoordinat = matrix[i][j].coordinates
             return(matrix[i][j].coordinates)
           } else {
-           console.log('nothing coordinates');
           }
         }
       }
@@ -197,17 +190,7 @@ export class App {
       const modeText= createElement('p', ['mode-text']);
       mode.append(modeText)
       
-      if (this.mode == 10) {
-        modeText.textContent = 'EASY'
-      }
-        
-      else if (this.mode == 15) {
-        modeText.textContent = 'MEDIUM'
-      }
-        
-      else if (this.mode == 25) {
-        modeText.textContent = 'HARD'
-      }
+      modeText.textContent = this.mode == 10 ? 'EASY' : this.mode == 15 ? 25 : this.mode == 25  ? 65 : 100;
       
       mode.addEventListener('click', () => {
        if (modeText.textContent == 'EASY') {
@@ -225,7 +208,6 @@ export class App {
       })
 
       modal.append(settings)
-      console.log('settings created')
       modal.addEventListener('click', (e)=> {
         if (e.target.classList.contains('modal')){
           modal.classList.remove('open')
@@ -239,12 +221,9 @@ export class App {
           this.lastClickCoordinates()
           const blocks = document.querySelectorAll('.box')
           let coordinates = this.lastClickCoordinates()
-          console.log( coordinates)
-          console.log( coordinates.x,coordinates.y    )
           this.refresh(this.width, this.heigth, this.bombs)
           matrix[coordinates.y][coordinates.x].onBoxClick()
         } else {
-          console.log('no, its not  a first click')
         }
       }
 
@@ -252,8 +231,6 @@ export class App {
         for (let i = 0; i < matrix.length; i++) {
           for (let j = 0; j < matrix[0].length; j++) {
              if(matrix[i][j].isBomb && matrix[i][j].isOpenned){
-               console.log('Ты проиграл ')
-               console.log('324324234')
                if (res) {
                 this.stopwatch.stop()
                 this.createEndGame('Lose') 
@@ -284,7 +261,6 @@ export class App {
           this.stopwatch.stop()
           winSound.play()
         }
-        console.log(counter)
       }
 
    createEndGame(word) {
@@ -328,7 +304,12 @@ export class App {
 
      refresh(width =10, height=10, bombs=10 ) {
       // bombs = this.mode == 10 ? 10  : this.mode == 15 ? 25;
-      document.querySelector('.flag-text').textContent ='10';
+
+ 
+      document.querySelector('.flag-text').textContent =  this.mode == 10 ? 10 : this.mode == 15? 25 : this.mode == 25 ? 65 : 100;
+
+
+  
 
       bombs = this.mode == 10
       ? 10
@@ -340,7 +321,6 @@ export class App {
         bombs = 65;
       }
       let boxes = document.querySelectorAll('.box')
-       console.log(boxes.length)
 
 
        this.width = width;

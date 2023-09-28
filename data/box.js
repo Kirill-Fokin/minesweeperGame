@@ -114,7 +114,7 @@ class Box {
     
  createBoxOnArea() {
      const boxElem = document.createElement('div')
-     boxElem.innerHTML = this.value || ''; 
+    //  boxElem.innerHTML = this.value || ''; 
      boxElem.classList.add('box'); 
      boxElem.classList.add('initial'); 
      if (this.value) {

@@ -19,13 +19,13 @@ export class Stopwatch {
 
   stop() {
     if (this.state=="running") {
-    this.state="paused";
- if (this.interval) {
-   clearInterval(this.interval);
-   this.interval = null;
- }
-  }
-}
+      this.state="paused";
+      if (this.interval) {
+        clearInterval(this.interval);
+        this.interval = null;
+      }
+    }
+  } 
   
   update() {
     if (this.state=="running") {
@@ -48,10 +48,10 @@ export class Stopwatch {
   stop() {
        if (this.state=="running") {
       this.state="paused";
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
+        if (this.interval) {
+          clearInterval(this.interval);
+          this.interval = null;
+        }
       }
   }
   
